@@ -1,16 +1,47 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <HeaderNav v-if="state.isShowNav"></HeaderNav>
+    <router-view></router-view>
+  </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HeaderNav from "@/components/HeaderNav";
+import {reactive} from "@vue/reactivity";
+import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
+import {onMounted} from "@vue/runtime-core";
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    HeaderNav
+  },
+  watch: {
+    $route: function (val, oldVal) {
+      this.routeChange(val, oldVal);
+    },
+  },
+  setup() {
+    const state = reactive({
+      isShowNav: false,
+      isShowSlider: false,
+    });
+    const route = useRoute();
+    const routeChange = (val,oldVal) => {
+      state.isShowNav = val.path !== "/";
+      const hiddenNavs = [
+        "/login"
+      ];
+      state.isShowNav = !hiddenNavs.includes(val.path);
+    };
+    onMounted(() => {
+      routeChange(route, route);
+    })
+    return {
+      state,
+      routeChange,
+    };
+  },
 }
 </script>
 
@@ -21,6 +52,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  background-color: #04122C!important;
+}
+html,body{
+  height: 100%;
 }
 </style>
