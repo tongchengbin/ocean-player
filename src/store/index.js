@@ -70,7 +70,7 @@ export default createStore({
                     commit('set_user',res.data)
                     resolve()
                 }).catch(error =>{
-                    reject(error)
+
                 })
             })
 

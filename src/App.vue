@@ -1,9 +1,8 @@
 <template>
-  <div id="app">
+  <div>
     <HeaderNav v-if="state.isShowNav"></HeaderNav>
-    <router-view></router-view>
+    <router-view style="padding-top: 50px"></router-view>
   </div>
-
 </template>
 
 <script>

@@ -5,7 +5,9 @@ import store from './store'
 import './permission' // permission control
 const app = createApp(App)
 import 'element-plus/lib/theme-chalk/index.css';
+import './styles/index.css'
 import {
+    ElEmpty,
     ElButton,
     ElDialog,
     ElForm,
@@ -24,9 +26,26 @@ import {
     ElCard,
     ElTag,
     ElIcon,
-    ElCollapseTransition
+    ElCollapseTransition,
+    ElProgress,
+    ElTable,
+    ElTableColumn,
+    ElLoading,
+    ElPagination,
+    ElAvatar,
+    ElTabs,
+    ElTabPane,
 } from 'element-plus';
+app.use(ElLoading);
+app.component(ElTabs.name, ElTabs);
+app.component(ElTabPane.name, ElTabPane);
+app.component(ElAvatar.name, ElAvatar);
+app.component(ElPagination.name, ElPagination);
+app.component(ElTable.name, ElTable);
+app.component(ElTableColumn.name, ElTableColumn);
+app.component(ElEmpty.name, ElEmpty);
 app.component(ElButton.name, ElButton);
+app.component(ElProgress.name, ElProgress);
 app.component(ElDialog.name, ElDialog);
 app.component(ElForm.name, ElForm);
 app.component(ElFormItem.name, ElFormItem);
