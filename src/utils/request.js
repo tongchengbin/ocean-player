@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-import { getToken } from './cookie'
+import {getToken, removeToken} from './cookie'
 import { ElMessage } from "element-plus";
 
 // create an axios instance
@@ -30,18 +30,20 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
-        if (res.code !== 0) {
+        if (res.code === 0) {
+            return res
+        }else if(res.code===4003) {
+            // 清空token 本地登出
+            removeToken()
+            return Promise.reject(new Error(res.msg || 'Error'))
+        }
+        else {
             ElMessage({
                 message: res.msg || 'Error',
                 type: 'error',
                 duration: 5 * 1000
             })
-            return Promise.reject(new Error(res.message || 'Error'))
-        }else if(res.code===4003) {
-
-        }
-        else {
-            return res
+            return Promise.reject(new Error(res.msg || 'Error'))
         }
     },
     error => {

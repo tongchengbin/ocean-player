@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="nav">
       <div class="nav-content">
         <el-row :gutter="20">
@@ -35,14 +34,14 @@
           </el-col>
           <el-col v-if="userInfo.id" :span="5">
             <div class="nav-right">
-              <el-dropdown>
+              <el-dropdown @command="handleCommand" class="drop-demo">
                 <div class="drop-title-box">
                   <span class="el-dropdown-link drop-title">{{userInfo.username}}</span>
                 </div>
                 <template #dropdown>
-                  <el-dropdown-menu>
-                    <el-dropdown-item>个人中心</el-dropdown-item>
-                    <el-dropdown-item>登出</el-dropdown-item>
+                  <el-dropdown-menu class="dropdown-menu-demo">
+                    <el-dropdown-item command="profile">个人中心</el-dropdown-item>
+                    <el-dropdown-item command="logout">登出</el-dropdown-item>
                   </el-dropdown-menu>
                 </template>
               </el-dropdown>
@@ -68,14 +67,6 @@
         </el-row>
       </div>
     </div>
-    <!--    <RegisterAndLogin-->
-    <!--        :visible="state.visible"-->
-    <!--        :isMobile="state.isMobile"-->
-    <!--        :handleFlag="state.handleFlag"-->
-    <!--        @ok="handleOk"-->
-    <!--        @cancel="handleCancel"-->
-    <!--    ></RegisterAndLogin>-->
-  </div>
 </template>
 
 <script>
@@ -83,6 +74,8 @@
 
 import mapState from "vuex/dist/vuex.mjs";
 import { useStore } from "vuex"
+import request from "@/utils/request";
+import store from "@/store";
 export default {
   name: "Nav",
   setup() {
@@ -112,7 +105,17 @@ export default {
     }
   },
   methods: {
+    handleCommand(command){
+      if(command==='logout'){
+        this.handleLogout()
+      }
+
+    },
     handleLogout(){
+      // 登出
+      request.post('/api/logout').then(res=>{
+         store.commit('set_user',{})
+      })
 
     },
     handleSelect(){
@@ -219,71 +222,11 @@ export default {
   }
 }
 
-.enter-slideUp,
-.leave-slideDown {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1010;
+.drop-demo{
+  border: none;
+}
+.nav .el-popper.is-light{
+  border: none!important;
 }
 
-.enter-slideUp {
-  overflow: auto;
-  visibility: visible;
-  z-index: 1001;
-  animation: slideUp 0.3s forwards;
-}
-
-.leave-slideDown {
-  visibility: visible;
-  z-index: 1001;
-  animation: slideDown 0.3s forwards;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translate3d(0, 100%, 0);
-    opacity: 0.1;
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideDown {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(0, 100%, 0);
-    opacity: 0;
-  }
-}
-
-.mask {
-  position: fixed;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  opacity: 0.5;
-}
-
-.mask-fade-out {
-  animation: maskFadeOut 0.4s forwards;
-}
-
-@keyframes maskFadeOut {
-  from {
-    opacity: 0.5;
-  }
-  to {
-    opacity: 0;
-  }
-}
 </style>
