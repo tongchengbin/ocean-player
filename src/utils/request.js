@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 import {getToken, removeToken} from './cookie'
 import { ElMessage } from "element-plus";
 import {createRouter as routers} from "vue-router/dist/vue-router.esm-browser";
@@ -36,12 +37,7 @@ service.interceptors.response.use(
             // 清空token 本地登出
             removeToken()
             router.push({"path":'/login'})
-            ElMessage({
-                message: res.msg || 'Error',
-                type: 'error',
-                duration: 5 * 1000
-            })
-            return Promise.reject(new Error(res.msg))
+            return Promise.reject(new Error(res.msg || 'Error'))
         }
         else {
             ElMessage({
@@ -49,7 +45,7 @@ service.interceptors.response.use(
                 type: 'error',
                 duration: 5 * 1000
             })
-            return Promise.reject(new Error(res.msg || 'Error'))
+            return Promise.reject(new Error(res.msg))
         }
     },
     error => {

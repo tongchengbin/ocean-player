@@ -105,13 +105,12 @@ export default {
     }
   },
   methods: {
-    handleCommand(command){
-      if(command==='logout'){
+    handleCommand(command) {
+      if (command === 'logout') {
         this.handleLogout()
-      }else {
-        this.$router.push({"path":"profile"})
+      } else {
+        this.$router.push({"path": "profile"})
       }
-
     },
     handleLogout(){
       // 登出
