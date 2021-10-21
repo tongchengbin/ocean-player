@@ -35,10 +35,10 @@
           </div>
 
           <div style="font-size: .7em;color: #c8d0df;margin: 10px">
-            题目类型：<span style="color: #0080ff">Web</span>
+            题目类型：<span style="color: #0080ff">{{ challenge.type }}</span>
           </div>
           <div style="font-size: .7em;color: #c8d0df;margin: 10px">
-            解题人数：<span style="color: #0080ff">200</span>
+            解题人数：<span style="color: #0080ff">{{ challenge.solved_cnt }}</span>
           </div>
         </div>
       </div>
