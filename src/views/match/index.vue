@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <el-dialog v-model="dialogPopVisible" center :show-close="false" custom-class="challenge-pop">
+    <el-dialog v-model="dialogPopVisible" center :show-close="false" custom-class="challenge-pop" :before-close="handlerClose">
       <h1 style="margin: auto;text-align: center;color: #0080ff">
         {{ detail.name }}
       </h1>
@@ -145,7 +145,12 @@ export default {
         this.challenges = res.data
       })
     },
+    handlerClose(done){
+      clearTimeout(this.func)
+      done()
+    },
     fetchDetail(id) {
+      let that = this
       request.get(`/api/challenge/${id}`).then(res => {
         this.detail = res.data
         this.dialogPopVisible = true
@@ -153,16 +158,16 @@ export default {
           let start_time = new Date(res.data.container.create_time).getTime()
           let end_time = new Date(res.data.container.destroy_time).getTime()
           // 开启一个计时器
-          let func = setInterval(() => {
+          that.func = setInterval(() => {
             // 获取当前时间
             let now = new Date().getTime()
             let percentage = (now - start_time) / (end_time - start_time)
             this.percentage = (percentage > 1 ? 1 : percentage) * 100
             if (percentage > 1) {
-              clearTimeout(func)
+              clearTimeout(that.func)
               this.fetchDetail(id)
             }
-          }, 500)
+          }, 3000)
         }
       }).catch(err=>{
 
