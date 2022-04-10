@@ -13,12 +13,12 @@
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="密码" v-model="form.password">
+            <el-input placeholder="密码" v-model="form.password" show-password>
               <template #prepend><i class="el-icon-lock"></i></template>
             </el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="确认密码" v-model="form.confirm_password">
+            <el-input placeholder="确认密码" v-model="form.confirm_password" show-password>
               <template #prepend><i class="el-icon-lock"></i></template>
             </el-input>
           </el-form-item>
