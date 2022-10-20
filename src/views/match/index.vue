@@ -88,7 +88,7 @@
         </el-progress>
         <div class="url-box" v-if="detail.container">
           <template v-for="u in detail.container.urls">
-            <a target="_blank" :href="u.url">Origin Port:{{ u.origin }}</a>
+            <a target="_blank" :href="u.url">目标站点:{{ u.origin }}</a>
           </template>
         </div>
         <el-button v-if="detail.active_flag && detail.container===null" size="mini" type="primary"

@@ -33,7 +33,7 @@ service.interceptors.response.use(
         const res = response.data
         if (res.code === 0) {
             return res
-        }else if(res.code===4003) {
+        }else if(res.code===403) {
             // 清空token 本地登出
             removeToken()
             router.push({"path":'/login'})
