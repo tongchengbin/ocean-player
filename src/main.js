@@ -15,6 +15,7 @@ import {
     ElInput,
     ElMessage,
     ElMenu,
+    ElLink,
     ElMenuItem,
     ElRow,
     ElCol,
@@ -63,6 +64,7 @@ app.component(ElDropdown.name, ElDropdown);
 app.component(ElCard.name, ElCard);
 app.component(ElTag.name, ElTag);
 app.component(ElIcon.name, ElIcon);
+app.component(ElLink.name, ElLink);
 app.component(ElCollapseTransition.name, ElCollapseTransition);
 app.use(router)
 app.use(store)

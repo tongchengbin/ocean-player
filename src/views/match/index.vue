@@ -87,16 +87,16 @@
           <span style="color: #254070;font-weight: bold">{{ showText }}</span>
         </el-progress>
         <div class="url-box" v-if="detail.container">
-          <template v-for="u in detail.container.urls">
-            <a target="_blank" :href="u.url">目标站点:{{ u.origin }}</a>
+          <template v-for="(i,u) in detail.container.urls">
+              <el-link type="primary" target="_blank" :href="i.url">目标{{u+1}}</el-link>
           </template>
         </div>
-        <el-button v-if="detail.active_flag && detail.container===null" size="mini" type="primary"
+        <el-button :loading="starting" v-if="detail.active_flag && detail.container===null" size="mini" type="primary"
                    @click="startContainer">启动
         </el-button>
         <el-button v-if="detail.active_flag && detail.container != null" size="mini" type="primary" @click="delayed">延时
         </el-button>
-        <el-button v-if="detail.active_flag && detail.container != null" size="mini" type="danger" @click="destroy">销毁
+        <el-button :loading="destroying" v-if="detail.active_flag && detail.container != null" size="mini" type="danger" @click="destroy">销毁
         </el-button>
       </div>
       <div class="submit">
@@ -122,7 +122,7 @@ export default {
   created() {
     this.fetchList()
   },
-  setup() {
+  data() {
     const flag = ref('');
     const dialogPopVisible = ref(false);
     const detail = ref({
@@ -136,6 +136,8 @@ export default {
     const duration = ref(0)
     const percentage = ref(0)
     return {
+      starting:false,
+      destroying:false,
       showText: "题目倒计时",
       percentage,
       duration,
@@ -175,7 +177,7 @@ export default {
             // 获取当前时间
             let now = new Date().getTime()
             // 已消耗时间
-            let used = (now - start_time) / 1000
+            let used = parseInt((now - start_time) / 1000)
             this.showText = `剩余${timeout-used}秒`;
             let percentage = used/timeout
             this.percentage = (percentage > 1 ? 1 : percentage) * 100
@@ -203,7 +205,9 @@ export default {
       clearTimeout(this.func)
       this.percentage = 0;
       let id = this.detail.id;
+      this.starting = true
       request.post(`/api/challenge/${id}/start`).then(res => {
+        this.starting = false
         this.fetchDetail(id)
       })
     },
@@ -220,7 +224,9 @@ export default {
     },
     destroy() {
       let id = this.detail.id
+      this.destroying=true
       request.post(`/api/challenge/${id}/destroy`).then(res => {
+        this.destroying = false
         this.fetchDetail(id)
         clearTimeout(this.func)
       })
@@ -255,11 +261,6 @@ export default {
 .url-box {
   margin: 10px;
   padding: 10px;
-
-  a {
-    text-decoration-color: #0080ff;
-    color: #fff;
-  }
 }
 
 .types {
