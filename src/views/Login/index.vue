@@ -8,12 +8,12 @@
     <div class="login-form">
       <el-form>
         <el-form-item>
-          <el-input placeholder="请输入内容" v-model="form.username">
+          <el-input placeholder="请输入用户名" v-model="form.username">
             <template #prepend><i class="el-icon-user-solid"></i></template>
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-input placeholder="请输入内容" v-model="form.password">
+          <el-input placeholder="请输入密码" type="password" v-model="form.password">
             <template #prepend><i class="el-icon-lock"></i></template>
           </el-input>
         </el-form-item>
