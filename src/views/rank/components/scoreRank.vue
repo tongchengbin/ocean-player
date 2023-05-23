@@ -76,4 +76,6 @@ export default {
 /deep/ .el-pagination__total{
   color:#c0c4cc
 }
+
+
 </style>
