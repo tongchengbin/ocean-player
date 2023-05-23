@@ -4,8 +4,14 @@ import router from "./router";
 import store from './store'
 import './permission' // permission control
 const app = createApp(App)
-import 'element-plus/lib/theme-chalk/index.css';
-import './styles/index.css'
+import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import "./styles/index.css";
+import "./styles/elementExpand.less";
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
+
+
 import {
     ElEmpty,
     ElButton,
@@ -66,6 +72,12 @@ app.component(ElTag.name, ElTag);
 app.component(ElIcon.name, ElIcon);
 app.component(ElLink.name, ElLink);
 app.component(ElCollapseTransition.name, ElCollapseTransition);
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+}
+
+
 app.use(router)
 app.use(store)
+
 app.mount('#app');

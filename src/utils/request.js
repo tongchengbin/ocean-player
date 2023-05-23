@@ -36,8 +36,8 @@ service.interceptors.response.use(
         }else if(res.code===403) {
             // 清空token 本地登出
             removeToken()
-            router.push({"path":'/login'})
-            return Promise.reject(new Error(res.msg || 'Error'))
+            router.push({"path":'/login'}).then()
+            return res
         }
         else {
             ElMessage({

@@ -5,23 +5,30 @@
       <img style="display: flex" src="../../assets/logo.svg" width="30" height="30" type="image/svg+xml">
       <span style="display: flex;margin-left: 5px;font-size: 22px;color: #fff">Ocean CTF 登录</span>
     </div>
-    <div class="login-form">
-      <el-form>
-        <el-form-item>
-          <el-input placeholder="请输入用户名" v-model="form.username">
-            <template #prepend><i class="el-icon-user-solid"></i></template>
-          </el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-input placeholder="请输入密码" type="password" v-model="form.password">
-            <template #prepend><i class="el-icon-lock"></i></template>
-          </el-input>
-        </el-form-item>
-        <el-form-item class="login-btn">
-          <el-button size="small" type="primary" @click="login">登录</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
+    <el-row>
+      <el-col :span="16" :offset="4">
+          <el-form style="margin: 20px;">
+            <el-form-item style="margin: 20px 4px;">
+              <el-input placeholder="请输入用户名" v-model="form.username">
+                <template #prepend>
+                  <el-icon><User/></el-icon>
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item style="margin: 20px 4px;">
+              <el-input placeholder="请输入密码" type="password" v-model="form.password">
+                <template #prepend>
+                  <el-icon><Lock/></el-icon>
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item class="login-btn" style="margin: 20px 4px;">
+              <el-button type="primary" @click="login">登录</el-button>
+            </el-form-item>
+          </el-form>
+      </el-col>
+    </el-row>
+
   </div>
 </div>
 </template>
@@ -68,25 +75,17 @@ name: "index",
   justify-items: center;
   align-items: center;
 }
-.login-form{
-  margin: 40px auto;
-  width: 80%;
-}
-.login-form .login-btn >>>  .el-button{
+
+.login-btn >>>  .el-button{
   font-size: 14px;
   font-weight: 500;
   padding: 4px 40px;
 }
-.login-form >>> .el-input{
-  width: 80%;
+.login-btn >>>  .el-form-item__content{
+  justify-content: center;
 }
 .login-form >>> .el-input-group__prepend{
   background-color: #0E1F3E;
   border: none;
-}
-.login-form >>> .el-input__inner{
-  color: #57a3f3;
-  border: none;
-  background-color: #0E1F3E;
 }
 </style>

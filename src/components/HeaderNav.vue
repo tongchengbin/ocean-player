@@ -98,6 +98,11 @@ export default {
         path: "/rank",
         name: "榜单",
       },
+      {
+        index: "4",
+        path: "/vuln",
+        name: "漏洞复现",
+      },
     ]
     return {
       menuList,
@@ -132,13 +137,15 @@ export default {
 
 
 <style scoped lang="less">
+.menu-txt{
+  color: #ffffff;
+}
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
   width: 100%;
-  border-bottom: 1px solid #04122C ;
   background-color: #0E1F3E;
   .el-menu-demo{
     .el-menu-item:hover{
@@ -146,7 +153,7 @@ export default {
     }
     .el-menu-item{
       .menu-txt{
-        padding: 10px 10px;
+        padding: 10px 10px 6px;
       }
       .menu-txt:hover{
         background-color: #0081ff;
@@ -225,9 +232,6 @@ export default {
 
 .drop-demo{
   border: none;
-}
-.nav .el-popper.is-light{
-  border: none!important;
 }
 
 </style>

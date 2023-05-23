@@ -44,6 +44,22 @@ const routes = [
         }
     },
     {
+        path: "/vuln",
+        name: "vuln",
+        component: () => import('../views/vuln/index'),
+        meta:{
+            auth:false
+        }
+    },
+    {
+        path: "/vuln/detail",
+        name: "vuln.detail",
+        component: () => import('../views/vuln/detail'),
+        meta:{
+            auth:false
+        }
+    },
+    {
         path: "/profile",
         name: "profile",
         component: () => import('../views/profile/index'),
