@@ -78,7 +78,7 @@ export default {
       request.post(`/api/vuln/${row.id}/start`).then(res=>{
         ElMessage.success("启动成功")
         this.getList()
-      })
+      }).catch(err=>{})
     },
     getList(){
       request.get('/api/vuln',{params:{search:this.searchInput}}).then(res=>{

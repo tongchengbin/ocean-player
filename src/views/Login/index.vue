@@ -7,7 +7,7 @@
     </div>
     <el-row>
       <el-col :span="16" :offset="4">
-          <el-form style="margin: 20px;">
+          <el-form class="login-form" style="margin: 20px;">
             <el-form-item style="margin: 20px 4px;">
               <el-input placeholder="请输入用户名" v-model="form.username">
                 <template #prepend>
@@ -83,6 +83,10 @@ name: "index",
 }
 .login-btn >>>  .el-form-item__content{
   justify-content: center;
+}
+.login-form >>> .el-input-group__prepend{
+  background-color: #0E1F3E;
+  border: none;
 }
 .login-form >>> .el-input-group__prepend{
   background-color: #0E1F3E;

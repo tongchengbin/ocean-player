@@ -8,7 +8,7 @@
 <script>
 import HeaderNav from "@/components/HeaderNav";
 import {reactive} from "@vue/reactivity";
-import { useRouter, useRoute, onBeforeRouteUpdate } from 'vue-router';
+import { useRoute } from 'vue-router';
 import {onMounted} from "@vue/runtime-core";
 export default {
   name: 'App',
@@ -29,7 +29,7 @@ export default {
     const routeChange = (val,oldVal) => {
       state.isShowNav = val.path !== "/";
       const hiddenNavs = [
-        "/login"
+        "/login","/register"
       ];
       state.isShowNav = !hiddenNavs.includes(val.path);
     };

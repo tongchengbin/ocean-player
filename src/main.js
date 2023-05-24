@@ -7,7 +7,9 @@ const app = createApp(App)
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import "./styles/index.css";
+import './styles/var.css';
 import "./styles/elementExpand.less";
+
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 
