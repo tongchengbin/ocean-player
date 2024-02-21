@@ -1,5 +1,5 @@
 {
-  "name": "ocean_vue3",
+  "name": "ocean_ctf",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,13 +10,11 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
-    "axios": "^0.21.1",
+    "axios": "1.6.7",
     "core-js": "^3.6.5",
     "element-plus": "^2.3.5",
     "less": "^4.1.1",
     "less-loader": "^7.0.0",
-    "markdown-editor": "^1.0.1",
-    "markdown-it": "^13.0.1",
     "mavon-editor": "^2.10.4",
     "nprogress": "^0.2.0",
     "plus": "^0.1.0",
