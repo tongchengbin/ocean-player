@@ -63,10 +63,8 @@ export default {
   methods:{
     login(){
       request.post('/api/register',this.form).then(res=>{
-        let token = res.data.token
-        setToken(token)
         ElMessage.success("注册成功")
-        router.push({path: '/'});
+        router.push({path: '/login'});
       })
 
     }

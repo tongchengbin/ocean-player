@@ -33,7 +33,7 @@ service.interceptors.response.use(
         const res = response.data
         if (res.code === 0) {
             return res
-        }else if(res.code===403) {
+        }else if(res.code===403 || res.code===401) {
             // 清空token 本地登出
             removeToken()
             router.push({"path":'/login'}).then()
@@ -41,11 +41,11 @@ service.interceptors.response.use(
         }
         else {
             ElMessage({
-                message: res.msg || 'Error',
+                message: res.message || 'Error',
                 type: 'error',
                 duration: 5 * 1000
             })
-            return Promise.reject(new Error(res.msg))
+            return Promise.reject(new Error(res.message))
         }
     },
     error => {

@@ -52,7 +52,7 @@ name: "index",
   methods:{
     login(){
       request.post('/api/login',this.form).then(res=>{
-        let token = res.data.token
+        let token = res.token
         setToken(token)
         this.$router.replace({path: '/'});
       })

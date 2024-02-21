@@ -76,7 +76,7 @@
       </div>
       <div class="attachment">
         <a v-for="item in detail.attachment" :href="item.url" target="_blank">
-          <el-tag effect="dark" size="mini">{{ item.name }}</el-tag>
+          <el-tag effect="dark" >{{ item.name }}</el-tag>
         </a>
       </div>
       <div class="startContainer" v-if="detail.active_flag">
@@ -84,26 +84,27 @@
                      color="#c6e2ff"
                      :duration="0"
                      :format="format" class="process">
-          <span style="color: #254070;font-weight: bold">{{ showText }}</span>
+          <span style="color: #FFF;font-weight: bold">{{ showText }}</span>
         </el-progress>
         <div class="url-box" v-if="detail.container">
           <template v-for="(i,u) in detail.container.urls">
               <el-link type="primary" target="_blank" :href="i.url">目标{{u+1}}</el-link>
           </template>
         </div>
-        <el-button :loading="starting" v-if="detail.active_flag && detail.container===null" size="mini" type="primary"
+        <el-button :loading="starting" v-if="detail.active_flag && detail.container===null"  type="primary"
                    @click="startContainer">启动
         </el-button>
-        <el-button v-if="detail.active_flag && detail.container != null" size="mini" type="primary" @click="delayed">延时
+        <el-button v-if="detail.active_flag && detail.container != null"  type="primary" @click="delayed">延时
         </el-button>
-        <el-button :loading="destroying" v-if="detail.active_flag && detail.container != null" size="mini" type="danger" @click="destroy">销毁
+        <el-button :loading="destroying" v-if="detail.active_flag && detail.container != null"  type="danger" @click="destroy">销毁
         </el-button>
       </div>
       <div class="submit">
         <el-input size="small" v-model="flag">
-          <template #prepend><i class="el-icon-s-flag"></i></template>
+          <template #prepend>        <Calendar style="width: 10px;height: 10px"></Calendar>
+          </template>
         </el-input>
-        <el-button size="small" type="primary" @click="submit">提交</el-button>
+        <el-button  type="primary" @click="submit">提交</el-button>
       </div>
     </el-dialog>
   </div>
@@ -113,12 +114,13 @@
 <script>
 import {ref} from "@vue/reactivity";
 import request from "@/utils/request";
-import formatSeconds from "@/utils/tools"
 import {ElMessage} from "element-plus";
+import {Calendar} from "@element-plus/icons-vue";
 
 
 export default {
   name: "index",
+  components: {Calendar},
   created() {
     this.fetchList()
   },
@@ -209,6 +211,8 @@ export default {
       request.post(`/api/challenge/${id}/start`).then(res => {
         this.starting = false
         this.fetchDetail(id)
+      }).catch(err=>{
+        this.starting = false
       })
     },
     delayed() {
@@ -229,8 +233,13 @@ export default {
         this.destroying = false
         this.fetchDetail(id)
         clearTimeout(this.func)
-      })
-    },
+        ElMessage({
+          type: "success",
+          message: "销毁成功！"
+        })
+      }).catch(err=>{
+        this.destroying = false
+    })},
     openUrl() {
       let url = this.detail.container.url;
       window.open(url)
@@ -417,19 +426,23 @@ export default {
 
   .submit {
     text-align: center;
-
+    .el-input__wrapper{
+      padding: 4px;
+      border: 1px solid #0081ff;
+      border-left: none;
+    }
+    .el-input-group__prepend{
+      border: 1px solid #0081ff;
+      border-right: none;
+    }
     .el-input {
       width: 50%;
     }
 
     .el-input__inner {
       color: yellow;
-      border: 1px solid #0080ff;;
-      background-color: #1b2f53a8;
     }
-
     .el-input-group__prepend {
-      border: 1px solid #0080ff;;
       background-color: #1b2f53a8;
     }
 

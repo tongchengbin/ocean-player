@@ -57,7 +57,7 @@ export default {
   padding: 0;
 }
 html{
-  background-color: #04122C!important;
+  background-color: rgb(18,25,38);
 }
 html,body{
   height: 100%;

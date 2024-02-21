@@ -1,6 +1,6 @@
 <template>
-    <el-table :data="list" v-loading="loading" style="border-radius: 4px">
-      <el-table-column prop="rank" label="排名" width="50"></el-table-column>
+    <el-table :data="list" v-loading="loading" style="border-radius: 4px" class="custom-table border-bt">
+      <el-table-column prop="rank" label="排名" width="60"></el-table-column>
       <el-table-column prop="username" label="用户"></el-table-column>
       <el-table-column prop="score" label="积分"></el-table-column>
       <el-table-column prop="cnt" label="解题数"></el-table-column>
@@ -75,6 +75,9 @@ export default {
 }
 /deep/ .el-pagination__total{
   color:#c0c4cc
+}
+/deep/ .border-bt{
+  border-bottom: thin solid rgba(164,177,205,.05)!important;
 }
 
 

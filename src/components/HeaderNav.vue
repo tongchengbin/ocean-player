@@ -16,7 +16,7 @@
                 :router="true"
                 active-text-color="#409eff"
                 text-color="#c7c7c7"
-                background-color="#0E1F3E"
+                background-color="rgb(25,35,50)"
                 class="el-menu-demo"
                 mode="horizontal"
                 @select="handleSelect"
@@ -100,7 +100,7 @@ export default {
       },
       {
         index: "4",
-        path: "/vuln",
+        path: "/vulnerability",
         name: "漏洞复现",
       },
     ]
@@ -146,7 +146,7 @@ export default {
   left: 0;
   z-index: 1000;
   width: 100%;
-  background-color: #0E1F3E;
+  background-color: rgb(25,35,50);
   .el-menu-demo{
     .el-menu-item:hover{
       background:none!important;
@@ -162,8 +162,8 @@ export default {
       padding: 0 5px!important;
       height: 50px;
       line-height: 50px;
-      font-size: 14px;
-      font-weight: 400;
+      font-size: 16px;
+      font-weight: 500;
       font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     }
   }
@@ -176,17 +176,18 @@ export default {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-
+    color: inherit;
   }
   .logo-title{
+    margin-left: 4px;
     line-height: 50px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
-    color: #337ab7;
+    color: #FFFFFF;
     display: inline-block;
   }
   .logo {
-    height: 30px;
+    height: 32px;
     margin: 0;
     border-radius: 50%;
   }
