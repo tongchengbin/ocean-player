@@ -1,4 +1,9 @@
 
 html.dark {
-    --el-fill-color-light: none;
+    --el-fill-color-light: rgb(26,35,50);
+    --el-fill-color-lighter: rgb(26,35,50);
+    --el-table-bg-color: rgb(18,25,38);
+    --el-table-header-bg-color: rgb(18,25,38);
+    --el-bg-color: rgb(18,25,38);
+    --el-input-hover-border-color: rgb(26,35,50);
 }

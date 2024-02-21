@@ -44,11 +44,15 @@ import {
     ElAvatar,
     ElTabs,
     ElTabPane,
+    ElSelect,
+    ElOption,
 } from 'element-plus';
 app.use(ElLoading);
 app.component(ElTabs.name, ElTabs);
 app.component(ElTabPane.name, ElTabPane);
 app.component(ElAvatar.name, ElAvatar);
+app.component(ElSelect.name, ElSelect);
+app.component(ElOption.name, ElOption);
 app.component(ElPagination.name, ElPagination);
 app.component(ElTable.name, ElTable);
 app.component(ElTableColumn.name, ElTableColumn);

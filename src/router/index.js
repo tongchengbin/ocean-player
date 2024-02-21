@@ -44,17 +44,17 @@ const routes = [
         }
     },
     {
-        path: "/vuln",
-        name: "vuln",
-        component: () => import('../views/vuln/index'),
+        path: "/vulnerability",
+        name: "vulnerability",
+        component: () => import('../views/vulnerability/index'),
         meta:{
             auth:false
         }
     },
     {
-        path: "/vuln/detail",
-        name: "vuln.detail",
-        component: () => import('../views/vuln/detail'),
+        path: "/vulnerability/detail",
+        name: "vulnerability.detail",
+        component: () => import('../views/vulnerability/detail'),
         meta:{
             auth:false
         }

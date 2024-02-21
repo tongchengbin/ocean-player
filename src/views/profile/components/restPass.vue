@@ -1,5 +1,5 @@
 <template>
-  <el-form :model="form" ref="form_rest" size="small" class="form" label-position="top" :rules="rules">
+  <el-form :model="form" ref="form_rest"  class="form" label-position="top" :rules="rules">
     <el-form-item label="当前密码" prop="old_password">
       <el-input  v-model="form.old_password" :show-password="true"></el-input>
     </el-form-item>
@@ -10,7 +10,7 @@
       <el-input  v-model="form.confirm_password" :show-password="true"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" size="small" @click="submit">提交</el-button>
+      <el-button type="primary"  @click="submit">提交</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -95,7 +95,7 @@ export default {
   }
 
   .el-input-group__prepend {
-    background-color: #0E1F3E;
+    background-color: rgb(25,35,50);
     border: none;
   }
 

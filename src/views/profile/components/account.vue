@@ -1,10 +1,10 @@
 <template>
-  <el-form ref="form_account" :model="form"  size="small" class="form" label-position="top" :rules="rules">
+  <el-form ref="form_account" :model="form"  class="form" label-position="top" :rules="rules">
     <el-form-item label="用户名" prop="username">
       <el-input v-model="form.username"  ></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" size="small" @click="submit">提交</el-button>
+      <el-button type="primary" @click="submit">提交</el-button>
     </el-form-item>
   </el-form>
 </template>

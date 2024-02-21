@@ -20,15 +20,6 @@ export default {
 
 <style scoped lang="less">
 /deep/ .el-table{
-  color: #fff;
-  background-color: #1b2f53a8;
-  thead{
-    color: #0081ff;
-  }
-  tr,th{
-    background-color: #1b2f53a8;
-    border-bottom-color: #2c3e50;
-  }
   td{
     border-bottom-color: #2c3e50;
   }
