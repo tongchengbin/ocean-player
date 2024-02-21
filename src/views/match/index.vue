@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <el-dialog v-model="dialogPopVisible" center :show-close="false" custom-class="challenge-pop"
+    <el-dialog v-model="dialogPopVisible" center :show-close="false" class="challenge-pop"
                :before-close="handlerClose">
       <h1 style="margin: auto;text-align: center;color: #0080ff">
         {{ detail.name }}
@@ -370,7 +370,7 @@ export default {
   }
 }
 
-/deep/ .challenge-pop {
+:deep(.challenge-pop) {
   width: 44em !important;
   background-color: #1b2f53e8;
 
