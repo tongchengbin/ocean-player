@@ -49,8 +49,8 @@ export default {
     fetchList(){
       this.loading = true
       request.get("/api/rank/score",{params:this.listQuery}).then(res=>{
-        this.list = res.data.data;
-        this.total = res.data.total;
+        this.list = res.data;
+        this.total = res.total;
         this.loading = false;
       })
     },
