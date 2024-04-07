@@ -10,6 +10,7 @@
           <li @click="changeType('pwn')" class="type" :class="type==='pwn'?'active':''"><a>Pwn</a></li>
           <li @click="changeType('iot')" class="type" :class="type==='iot'?'active':''"><a>Iot</a></li>
           <li @click="changeType('misc')" class="type" :class="type==='misc'?'active':''"><a>Misc</a></li>
+          <li @click="changeType('reverse')" class="type" :class="type==='reverse'?'active':''"><a>Reverse</a></li>
         </ul>
       </div>
     </div>
@@ -274,7 +275,6 @@ export default {
 
 .types {
   margin: 20px 10px;
-
   .type_title {
     display: inline-block;
     color: #fff;
@@ -285,19 +285,19 @@ export default {
   }
 
   .active a {
-    color: #04122C !important;
+    color: #ffffff !important;
     background: #0081ff;
   }
 
   .type {
+    padding: 4px;
     cursor: pointer;
     display: inline-block;
     color: #fff;
-    margin: 2px 2px;
-    padding: 0 4px;
-
+    //margin: 2px 2px;
     a {
-      padding: 3px 10px;
+      display: inline-block;
+      padding: 6px 12px;
       border-radius: 3px;
       color: #cac4b7;
       text-decoration: none
