@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import HeaderNav from "@/components/HeaderNav";
+import HeaderNav from "@/components/HeaderNav.vue";
 import {reactive} from "@vue/reactivity";
 import { useRoute } from 'vue-router';
 import {onMounted} from "@vue/runtime-core";

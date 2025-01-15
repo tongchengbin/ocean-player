@@ -1,12 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-
-
 const routes = [
     {
         path: "/login",
         name: "login",
-        component: () => import('../views/Login/index'),
+        component: () => import('@/views/Login/index.vue'),
         meta:{
             auth:false
         }
@@ -14,7 +12,7 @@ const routes = [
     {
         path: "/register",
         name: "register",
-        component: () => import('../views/Login/register'),
+        component: () => import('@/views/Login/register.vue'),
         meta:{
             auth:false
         }
@@ -22,7 +20,7 @@ const routes = [
     {
         path: "/",
         name: "center",
-        component: () => import('../views/match/index'),
+        component: () => import('@/views/match/index.vue'),
         meta:{
             auth:false
         }
@@ -30,7 +28,7 @@ const routes = [
     {
         path: "/notice",
         name: "notice",
-        component: () => import('../views/notice/index'),
+        component: () => import('@/views/notice/index.vue'),
         meta:{
             auth:false
         }
@@ -38,7 +36,7 @@ const routes = [
     {
         path: "/rank",
         name: "rank",
-        component: () => import('../views/rank/index'),
+        component: () => import('@/views/rank/index.vue'),
         meta:{
             auth:false
         }
@@ -46,23 +44,23 @@ const routes = [
     {
         path: "/vulnerability",
         name: "vulnerability",
-        component: () => import('../views/vulnerability/index'),
+        component: () => import('@/views/vulnerability/index.vue'),
         meta:{
             auth:false
         }
     },
     {
-        path: "/vulnerability/detail",
+        path: "/vulnerability/:id",
         name: "vulnerability.detail",
-        component: () => import('../views/vulnerability/detail'),
+        component: () => import('@/views/vulnerability/detail.vue'),
         meta:{
-            auth:false
+            auth:true
         }
     },
     {
         path: "/profile",
         name: "profile",
-        component: () => import('../views/profile/index'),
+        component: () => import('@/views/profile/index.vue'),
         meta:{
             auth:true
         }

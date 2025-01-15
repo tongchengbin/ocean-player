@@ -1,0 +1,30 @@
+.el-dropdown {
+    vertical-align: middle;
+}
+
+.el-tag {
+    line-height: 24px;
+}
+
+.el-menu--horizontal {
+    > .el-menu-item {
+        &.is-active {
+            > .menu-txt {
+                color: #ffffff;
+                background-color: #0081ff;
+                border-radius: 5px;
+            }
+            border: none;
+        }
+        
+        a, a:hover {
+            color: #ffffff;
+        }
+    }
+}
+
+.el-table {
+    .el-table__cell {
+        padding: 14px 0;
+    }
+}
