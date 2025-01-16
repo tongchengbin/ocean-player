@@ -21,6 +21,11 @@ export default defineConfig(({ command, mode }) => {
       port: 8080,
       open: true,
       proxy: {
+        '/socket.io': {
+          target: env.VITE_APP_BASE_API,
+          changeOrigin: true,
+          ws: true
+        },
         '/api': {
           target: env.VITE_APP_BASE_API,
           changeOrigin: true,

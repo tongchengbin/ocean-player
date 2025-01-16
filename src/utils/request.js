@@ -1,8 +1,6 @@
 import axios from 'axios'
-import store from '@/store'
 import {getToken, removeToken} from './cookie'
-import { ElMessage } from "element-plus";
-import {createRouter as routers} from "vue-router/dist/vue-router.esm-browser";
+import {ElMessage} from "element-plus";
 import router from "../router";
 
 // create an axios instance
@@ -33,13 +31,12 @@ service.interceptors.response.use(
         const res = response.data
         if (res.code === 0) {
             return res
-        }else if(res.code===403 || res.code===401) {
+        } else if (res.code === 403 || res.code === 401) {
             // 清空token 本地登出
             removeToken()
-            router.push({"path":'/login'}).then()
+            router.push({"path": '/login'}).then()
             return res
-        }
-        else {
+        } else {
             ElMessage({
                 message: res.message || 'Error',
                 type: 'error',

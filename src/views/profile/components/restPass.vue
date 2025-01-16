@@ -85,24 +85,21 @@ export default {
 
 }
 </script>
-
-<style scoped lang="less">
+<style lang="scss" scoped>
 .form {
   color: #fff;
 
-  /deep/ .el-form-item__label {
+  :deep(.el-form-item__label) {
     color: #fff;
   }
-
   .el-input-group__prepend {
-    background-color: rgb(25,35,50);
+    background-color: rgb(25, 35, 50);
     border: none;
   }
 
-  /deep/ .el-input__inner {
+  :deep(.el-input__inner) {
     color: #fff;
     border: none;
-    background-color: #0E1F3E;
   }
 }
 </style>

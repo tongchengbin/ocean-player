@@ -59,19 +59,21 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="less">
-/deep/ .el-card{
+<style lang="scss" scoped>
+:deep(.el-card) {
   color: #fff;
-  border:none;
-  background-color: #1b2f53a8 !important
+  border: none;
+  background-color: #1b2f53a8 !important;
 }
-/deep/ .el-tabs{
+
+:deep(.el-tabs) {
   color: #fff;
-  .is-active{
-    color:#409eff!important; ;
+
+  .is-active {
+    color: #409eff !important;
   }
-  .el-tabs__item{
+
+  .el-tabs__item {
     color: #fff;
   }
 }

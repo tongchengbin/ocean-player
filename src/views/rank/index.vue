@@ -18,22 +18,24 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-/deep/ .el-table{
-  td{
+<style lang="scss" scoped>
+:deep(.el-table) {
+  td {
     border-bottom-color: #2c3e50;
   }
-  th:hover > td{
+  th:hover > td {
     background-color: #1b2f53a8;
   }
-  tr:hover > td{
+  tr:hover > td {
     background-color: #1b2f53a8;
   }
 }
-/deep/ .el-table::before{
+
+:deep(.el-table::before) {
   background: none;
 }
-/deep/ .el-loading-mask{
-  background-color:#1b2f53a8
+
+:deep(.el-loading-mask) {
+  background-color: #1b2f53a8;
 }
 </style>

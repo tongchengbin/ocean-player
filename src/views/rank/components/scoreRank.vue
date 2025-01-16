@@ -63,22 +63,24 @@ export default {
 }
 </script>
 
-<style scoped lang="less">
-/deep/ .btn-prev{
-  background:none!important;
+<style lang="scss" scoped>
+:deep(.btn-prev) {
+  background: none !important;
 }
-/deep/ .btn-next{
-  background:none!important;
+
+:deep(.btn-next) {
+  background: none !important;
 }
-/deep/ .el-pager > .number {
+
+:deep(.el-pager > .number) {
   background: none;
 }
-/deep/ .el-pagination__total{
-  color:#c0c4cc
-}
-/deep/ .border-bt{
-  border-bottom: thin solid rgba(164,177,205,.05)!important;
+
+:deep(.el-pagination__total) {
+  color: #c0c4cc;
 }
 
-
+:deep(.border-bt) {
+  border-bottom: thin solid rgba(164, 177, 205, 0.05) !important;
+}
 </style>

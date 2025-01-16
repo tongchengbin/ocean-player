@@ -1,238 +1,104 @@
 <template>
-    <div class="nav">
-      <div class="nav-content">
-        <el-row :gutter="20">
-          <el-col :span="3">
-            <router-link to="/" class="logo-menu">
-              <img
-                  class="logo"
-                  src="../assets/logo.svg"
-                  alt="BiaoChenXuYing"
-              ><span class="logo-title">Ocean</span>
-            </router-link>
-          </el-col>
-          <el-col :span="16">
-            <el-menu
-                :router="true"
-                active-text-color="#409eff"
-                text-color="#c7c7c7"
-                background-color="rgb(25,35,50)"
-                class="el-menu-demo"
-                mode="horizontal"
-                @select="handleSelect"
-            >
-              <el-menuItem
-                  :route="l.path"
-                  :index="l.index"
-                  v-for="l in menuList"
-                  :key="l.index"
-                  class="menu-item"
-              >
-                <a class="menu-txt">{{ l.name }}</a>
-              </el-menuItem>
-            </el-menu>
-          </el-col>
-          <el-col v-if="userInfo.id" :span="5">
-            <div class="nav-right">
-              <el-dropdown @command="handleCommand" class="drop-demo">
-                <div class="drop-title-box">
-                  <span class="el-dropdown-link drop-title">{{userInfo.username}}</span>
-                </div>
-                <template #dropdown>
-                  <el-dropdown-menu class="dropdown-menu-demo">
-                    <el-dropdown-item command="profile">个人中心</el-dropdown-item>
-                    <el-dropdown-item command="logout">登出</el-dropdown-item>
-                  </el-dropdown-menu>
-                </template>
-              </el-dropdown>
-            </div>
-          </el-col>
-          <el-col
-              v-else
-              :span="4"
-          >
-            <div class="nav-right">
-              <div>
-                <el-button
-                    size="small"
-                    type="primary"
-                    @click="handleClick('login')">登录</el-button>
-                <el-button
-                    size="small"
-                    type="danger"
-                    @click="handleClick('register')">注册</el-button>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
+  <div class="nav-container">
+    <div class="nav-content">
+      <div class="nav-left">
+        <router-link to="/" class="nav-logo">
+          <img src="../assets/logo.svg" alt="Ocean" />
+          <span>Ocean</span>
+        </router-link>
+        <nav class="nav-menu">
+          <router-link to="/competition" class="nav-menu-item" :class="{ active: isActive('/competition') }">
+            赛事中心
+          </router-link>
+          <router-link to="/notice" class="nav-menu-item" :class="{ active: isActive('/notice') }">
+            公告
+          </router-link>
+          <router-link to="/rank" class="nav-menu-item" :class="{ active: isActive('/rank') }">
+            榜单
+          </router-link>
+          <router-link to="/vulnerability" class="nav-menu-item" :class="{ active: isActive('/vulnerability') }">
+            漏洞复现
+          </router-link>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <router-link v-if="!token" to="/login" class="nav-menu-item">
+          登录
+        </router-link>
+        <div v-else class="nav-user">
+          <div class="nav-user-avatar">
+            {{ username.charAt(0).toUpperCase() }}
+          </div>
+          <span>{{ username }}</span>
+          <el-dropdown @command="handleCommand">
+            <span class="el-dropdown-link">
+              <el-icon class="el-icon--right">
+                <arrow-down />
+              </el-icon>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="profile">个人中心</el-dropdown-item>
+                <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
+import { ref, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
+import { ArrowDown } from '@element-plus/icons-vue'
+import { getToken, removeToken } from '@/utils/cookie'
 
-
-import mapState from "vuex/dist/vuex.mjs";
-import { useStore } from "vuex"
-import request from "@/utils/request";
-import store from "@/store";
 export default {
-  name: "Nav",
-  setup() {
-    const store = useStore();
-
-    const userInfo=store.getters.user
-    const menuList = [
-      {
-        index: "1",
-        path: "/",
-        name: "赛事中心",
-      },
-      {
-        index: "2",
-        path: "/notice",
-        name: "公告",
-      },
-      {
-        index: "3",
-        path: "/rank",
-        name: "榜单",
-      },
-      {
-        index: "4",
-        path: "/vulnerability",
-        name: "漏洞复现",
-      },
-    ]
-    return {
-      menuList,
-      userInfo
-    }
+  name: 'HeaderNav',
+  components: {
+    ArrowDown
   },
-  methods: {
-    handleCommand(command) {
-      if (command === 'logout') {
-        this.handleLogout()
-      } else {
-        this.$router.push({"path": "profile"})
+  setup() {
+    const router = useRouter()
+    const route = useRoute()
+    const token = ref(getToken())
+    const username = ref('test') // 这里应该从用户状态获取
+
+    const isActive = (path) => {
+      if (path === '/') {
+        return route.path === '/'
       }
-    },
-    handleLogout(){
-      // 登出
-      request.post('/api/logout').then(res=>{
-         store.commit('set_user',{})
-      })
+      return route.path.startsWith(path)
+    }
 
-    },
-    handleSelect(){
+    const handleCommand = (command) => {
+      if (command === 'logout') {
+        ElMessageBox.confirm('确认退出登录吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          removeToken()
+          router.push('/login')
+        })
+      } else if (command === 'profile') {
+        router.push('/profile')
+      }
+    }
 
-    },
-    handleClick(path){
-      this.$router.push(path)
+    return {
+      token,
+      username,
+      isActive,
+      handleCommand
     }
   }
-
 }
 </script>
 
-
-<style scoped lang="less">
-.menu-txt{
-  color: #ffffff;
-}
-.nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100%;
-  background-color: rgb(25,35,50);
-  .el-menu-demo{
-    .el-menu-item:hover{
-      background:none!important;
-    }
-    .el-menu-item{
-      .menu-txt{
-        padding: 10px 10px 6px;
-      }
-      .menu-txt:hover{
-        background-color: #0081ff;
-        border-radius: 5px;
-      }
-      padding: 0 5px!important;
-      height: 50px;
-      line-height: 50px;
-      font-size: 16px;
-      font-weight: 500;
-      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    }
-  }
-  .nav-content {
-    width: 1200px;
-    margin: 0 auto;
-  }
-  .logo-menu{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: inherit;
-  }
-  .logo-title{
-    margin-left: 4px;
-    line-height: 50px;
-    font-size: 20px;
-    font-weight: 500;
-    color: #FFFFFF;
-    display: inline-block;
-  }
-  .logo {
-    height: 32px;
-    margin: 0;
-    border-radius: 50%;
-  }
-
-  .el-menu.el-menu--horizontal {
-    border-bottom: none;
-  }
-
-  .el-menu--horizontal > .el-menu-item {
-    cursor: pointer;
-    color: #333;
-  }
-
-  .nav-right {
-    line-height: 50px;
-    position: relative;
-    text-align: right;
-
-    .el-dropdown {
-      cursor: pointer;
-      padding-right: 40px;
-    }
-
-    .user-img {
-      position: absolute;
-      top: -15px;
-      right: 0;
-      width: 50px;
-      border-radius: 50%;
-    }
-  }
-}
-.drop-title-box{
-  .drop-title{
-    color:#c7c7c7;
-    padding: 10px 10px;
-  }
-  .drop-title:hover{
-    background-color: #0081ff;
-    border-radius: 5px;
-  }
-}
-
-.drop-demo{
-  border: none;
-}
-
+<style scoped>
+/* 样式已经在全局 CSS 中定义 */
 </style>

@@ -16,6 +16,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 
 import {
+    ElTooltip,
     ElEmpty,
     ElButton,
     ElDialog,
@@ -49,6 +50,7 @@ import {
     ElOption,
 } from 'element-plus';
 app.use(ElLoading);
+app.use(ElTooltip);
 app.component(ElTabs.name, ElTabs);
 app.component(ElTabPane.name, ElTabPane);
 app.component(ElAvatar.name, ElAvatar);

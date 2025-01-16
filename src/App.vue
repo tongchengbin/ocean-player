@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderNav v-if="state.isShowNav"></HeaderNav>
-    <router-view style="padding-top: 50px"></router-view>
+    <router-view style="padding-top: calc(60px + 0.5rem)"></router-view>
   </div>
 </template>
 
