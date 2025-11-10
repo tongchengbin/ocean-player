@@ -1,0 +1,68 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 构建前端产物
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      
+      - name: 安装依赖
+        run: yarn install --frozen-lockfile
+      
+      - name: 构建项目
+        run: yarn build
+      
+      - name: 打包构建产物
+        run: |
+          cd dist
+          tar -czf ../ocean-player-dist.tar.gz .
+          cd ..
+          zip -r ocean-player-dist.zip dist/
+      
+      - name: 上传构建产物到 Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocean-player-${{ github.sha }}
+          path: |
+            ocean-player-dist.tar.gz
+            ocean-player-dist.zip
+          retention-days: 90
+      
+      - name: 创建 Release（仅标签触发）
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ocean-player-dist.tar.gz
+            ocean-player-dist.zip
+          body: |
+            ## Ocean Player 前端构建产物
+            
+            **下载文件:**
+            - `ocean-player-dist.tar.gz` - Linux/macOS
+            - `ocean-player-dist.zip` - Windows
+            
+            **部署文档:** 请查看 [DEPLOYMENT.md](DEPLOYMENT.md)
+            
+            **版本信息:**
+            - Commit: ${{ github.sha }}
+            - 构建时间: ${{ github.event.head_commit.timestamp }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
